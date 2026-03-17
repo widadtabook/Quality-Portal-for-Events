@@ -1,150 +1,360 @@
 <!DOCTYPE html>
+
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>بوابة إدارة الفعاليات | الكلية المهنية بصلالة</title>
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --sky:    #4AAECC;   /* الأزرق الفاتح من الموقع */
+            --gold:   #D4921A;   /* الذهبي من زر دخول النظام */
+            --brown:  #7B5B2E;   /* من شعار VET */
+            --green:  #2E6B3E;
+            --red:    #A32020;
+            --blue:   #1A5F8A;
+            --bg:     #F4F6F8;
+            --white:  #FFFFFF;
+            --text:   #2C2C2C;
+            --muted:  #6B7280;
+            --border: #DDE2E8;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'IBM Plex Sans Arabic', sans-serif;
-            scroll-behavior: smooth;
+            background: var(--bg);
+            color: var(--text);
         }
-        .hero-gradient {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .card-shadow {
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
-        }
-        .card-shadow:hover {
-            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
-            transform: translateY(-5px);
-        }
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-    </style>
+
+```
+    /* ── TOP BAR (like MOE) ── */
+    .topbar {
+        background: var(--sky);
+        height: 52px;
+        display: flex; align-items: center;
+        padding: 0 1.5rem;
+        justify-content: space-between;
+    }
+    .topbar-logo {
+        display: flex; align-items: center; gap: 10px;
+    }
+    .topbar-logo img {
+        height: 36px; width: 36px; object-fit: contain;
+        border-radius: 4px;
+    }
+    .topbar-logo span {
+        color: white; font-size: 0.875rem; font-weight: 700;
+    }
+    .topbar-right {
+        display: flex; align-items: center; gap: 12px;
+    }
+    .topbar-lang {
+        color: white; font-size: 0.8rem; font-weight: 600;
+        text-decoration: none; opacity: 0.9;
+    }
+    .topbar-btn {
+        background: var(--gold);
+        color: white;
+        padding: 7px 18px;
+        border-radius: 4px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        text-decoration: none;
+        display: flex; align-items: center; gap: 6px;
+        transition: background 0.2s;
+    }
+    .topbar-btn:hover { background: #b87a10; }
+
+    /* ── HERO (white, center, big text like MOE) ── */
+    .hero {
+        background: var(--white);
+        border-bottom: 1px solid var(--border);
+        padding: 3.5rem 1.5rem 3rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    /* subtle diamond pattern like MOE background */
+    .hero::before {
+        content: '';
+        position: absolute; inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234AAECC' fill-opacity='0.05'%3E%3Cpath d='M30 0L60 30L30 60L0 30z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        background-size: 60px 60px;
+    }
+    .hero-inner {
+        position: relative; z-index: 1;
+        max-width: 700px; margin: 0 auto;
+    }
+    .hero-logo {
+        margin: 0 auto 1.5rem;
+        width: 90px; height: 90px; object-fit: contain;
+    }
+    .hero-title {
+        font-size: clamp(1.6rem, 5vw, 2.6rem);
+        font-weight: 800;
+        color: var(--text);
+        line-height: 1.45;
+        margin-bottom: 0.5rem;
+    }
+    .hero-subtitle {
+        font-size: 1rem;
+        color: var(--sky);
+        font-weight: 600;
+        margin-bottom: 1rem;
+        letter-spacing: 0.03em;
+    }
+    .hero-desc {
+        font-size: 0.95rem;
+        color: var(--muted);
+        line-height: 1.9;
+        max-width: 520px;
+        margin: 0 auto 2rem;
+    }
+    .hero-cta {
+        display: inline-flex; align-items: center; gap: 8px;
+        background: var(--gold); color: white;
+        padding: 12px 32px; border-radius: 5px;
+        font-size: 0.95rem; font-weight: 700;
+        text-decoration: none;
+        transition: background 0.2s;
+    }
+    .hero-cta:hover { background: #b87a10; }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb {
+        background: var(--white);
+        border-bottom: 1px solid var(--border);
+        padding: 0.6rem 1.5rem;
+    }
+    .breadcrumb-inner {
+        max-width: 1160px; margin: 0 auto;
+        display: flex; align-items: center; gap: 8px;
+        font-size: 0.8rem; color: var(--muted);
+    }
+    .breadcrumb-inner a { color: var(--sky); text-decoration: none; font-weight: 600; }
+    .breadcrumb-inner span { opacity: 0.5; }
+
+    /* ── SECTION ── */
+    .section-wrap { max-width: 1160px; margin: 0 auto; padding: 2.5rem 1.5rem 3rem; }
+    .section-title {
+        font-size: 1.1rem; font-weight: 800; color: var(--text);
+        border-right: 4px solid var(--sky);
+        padding-right: 12px;
+        margin-bottom: 1.5rem;
+    }
+
+    /* ── CARDS ── */
+    .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+        gap: 1.25rem;
+    }
+    .card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-top: 4px solid transparent;
+        border-radius: 8px;
+        padding: 1.75rem;
+        display: flex; flex-direction: column;
+        transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .card:hover {
+        box-shadow: 0 6px 24px rgba(0,0,0,0.09);
+        transform: translateY(-3px);
+    }
+    .card-header {
+        display: flex; align-items: center; gap: 12px;
+        margin-bottom: 1rem;
+    }
+    .card-icon {
+        width: 44px; height: 44px; border-radius: 8px;
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+    }
+    .card-label {
+        font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+        color: var(--muted); text-transform: uppercase; margin-bottom: 3px;
+    }
+    .card-title { font-size: 1rem; font-weight: 800; color: var(--text); }
+    .card-desc {
+        font-size: 0.875rem; color: var(--muted);
+        line-height: 1.85; flex: 1; margin-bottom: 1.25rem;
+    }
+    .card-btn {
+        display: block; text-align: center;
+        padding: 10px 0; border-radius: 5px;
+        font-size: 0.875rem; font-weight: 700;
+        text-decoration: none;
+        border: 1.5px solid transparent;
+        transition: all 0.2s;
+    }
+
+    /* accent variants */
+    .c-gold  { border-top-color: var(--gold); }
+    .c-gold .card-icon  { background: #FDF3E0; color: var(--gold); }
+    .c-gold .card-btn   { background: var(--gold); color: white; border-color: var(--gold); }
+    .c-gold .card-btn:hover { background: #b87a10; }
+
+    .c-sky   { border-top-color: var(--sky); }
+    .c-sky .card-icon   { background: #E7F5FA; color: var(--sky); }
+    .c-sky .card-btn    { background: white; color: var(--sky); border-color: var(--sky); }
+    .c-sky .card-btn:hover { background: var(--sky); color: white; }
+
+    .c-green { border-top-color: var(--green); }
+    .c-green .card-icon { background: #E6F2EB; color: var(--green); }
+    .c-green .card-btn  { background: white; color: var(--green); border-color: var(--green); }
+    .c-green .card-btn:hover { background: var(--green); color: white; }
+
+    /* ── CONTACT ── */
+    .contact-strip {
+        background: var(--sky);
+        padding: 2rem 1.5rem;
+        text-align: center;
+        margin-top: 3rem;
+    }
+    .contact-strip h3 { font-size: 1.1rem; font-weight: 700; color: white; margin-bottom: 0.5rem; }
+    .contact-strip p  { font-size: 0.85rem; color: rgba(255,255,255,0.8); margin-bottom: 1rem; }
+    .contact-strip a {
+        display: inline-flex; align-items: center; gap: 8px;
+        background: white; color: var(--sky);
+        padding: 10px 24px; border-radius: 5px;
+        font-size: 0.875rem; font-weight: 700;
+        text-decoration: none; word-break: break-all;
+        transition: opacity 0.2s;
+    }
+    .contact-strip a:hover { opacity: 0.85; }
+
+    /* ── FOOTER ── */
+    footer {
+        background: #2C3E50;
+        padding: 1.5rem;
+        text-align: center;
+    }
+    footer p { font-size: 11px; color: rgba(255,255,255,0.5); }
+    footer p + p { margin-top: 4px; }
+
+    @media (max-width: 640px) {
+        .topbar-lang { display: none; }
+        .hero { padding: 2.5rem 1rem 2rem; }
+    }
+</style>
+```
+
 </head>
-<body class="bg-[#fcfcfc] text-slate-900">
-    <!-- Header / Nav -->
-    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <div class="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center text-white shadow-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                </div>
-                <div>
-                    <h1 class="text-lg font-bold leading-none text-slate-900">
-                        قسم تطوير وضمان الجودة
-                    </h1>
-                    <p class="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-1">الكلية المهنية بصلالة</p>
-                </div>
-            </div>
-            <a href="mailto:development.quality.assurance@svc.edu.om" class="hidden md:flex items-center gap-2 px-5 py-2.5 bg-slate-900 text-white rounded-full text-sm font-semibold hover:bg-slate-800 transition-all">
-                <span>تواصل معنا</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-            </a>
-        </div>
-    </nav>
+<body>
 
-    <!-- Hero Section -->
-    <header class="hero-gradient relative overflow-hidden pt-20 pb-32 px-6">
-        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-10">
-            <div class="text-white text-center lg:text-right">
-                <div class="inline-block px-4 py-1.5 rounded-full bg-blue-500/20 text-blue-300 text-xs font-bold mb-6 border border-blue-500/30 tracking-widest uppercase">
-                    البوابة الرقمية الرسمية
-                </div>
-                <h2 class="text-4xl md:text-6xl font-black mb-8 leading-tight">تميز أكاديمي <br><span class="text-slate-400 font-light italic text-3xl md:text-5xl">بمعايير جودة عالمية</span></h2>
-                <p class="text-slate-300 text-lg mb-10 max-w-lg font-light leading-relaxed italic mx-auto lg:mx-0">
-                    "نسعى لتطوير تجربة تعليمية متميزة من خلال رصد الأداء وضمان جودة الفعاليات والورش التدريبية."
-                </p>
-                <div class="flex flex-wrap justify-center lg:justify-start gap-4">
-                    <a href="#portal" class="px-8 py-4 bg-white text-slate-900 rounded-2xl font-bold shadow-2xl hover:bg-slate-100 transition-all">ابدأ الآن</a>
-                </div>
-            </div>
-            <div class="hidden lg:flex justify-end">
-                <div class="animate-float glass-card p-8 rounded-[3rem] w-80 h-80 flex flex-col items-center justify-center text-center">
-                    <div class="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mb-6 border border-white/20">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                    </div>
-                    <p class="text-white text-xl font-bold italic">نطمح للأفضل دائماً</p>
-                    <p class="text-white/40 text-[10px] mt-4 tracking-[0.4em] uppercase font-bold">Quality First</p>
-                </div>
-            </div>
-        </div>
-    </header>
+<!-- TOP BAR -->
 
-    <!-- Services Section -->
-    <main id="portal" class="max-w-7xl mx-auto px-6 -mt-20 relative z-20 pb-24">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Registration Card -->
-            <div class="bg-white p-10 rounded-[2.5rem] card-shadow border border-slate-50 flex flex-col items-center text-center transition-all group">
-                <div class="w-16 h-16 bg-slate-50 text-slate-900 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-slate-900 group-hover:text-white transition-all">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
-                </div>
-                <h3 class="text-xl font-bold mb-4 text-slate-900">تسجيل الفعالية</h3>
-                <p class="text-slate-500 text-sm mb-8 leading-loose font-light italic">نموذج لتسجيل الورش التدريبية المتوقعة بالكلية.</p>
-                <a href="https://docs.google.com/forms/d/1GyH5sBdCzcEbAEI4vdGS5xGizf1-bV69MrbsFI8jVl8/viewform" class="mt-auto w-full py-4 px-6 bg-slate-50 text-slate-900 rounded-2xl font-bold hover:bg-slate-100 transition-colors">فتح الاستمارة</a>
-            </div>
+<div class="topbar">
+    <div class="topbar-logo">
+        <img src="/mnt/user-data/uploads/IMG_5089.jpeg" alt="شعار">
+        <span>الكلية المهنية بصلالة</span>
+    </div>
+    <div class="topbar-right">
+        <a href="#" class="topbar-lang">English</a>
+        <a href="/cdn-cgi/l/email-protection#cda9a8bba8a1a2bda0a8a3b9e3bcb8aca1a4b9b4e3acbebeb8bfaca3aea88dbebbaee3a8a9b8e3a2a0" class="topbar-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            تواصل معنا
+        </a>
+    </div>
+</div>
 
-            <!-- Evaluation Card -->
-            <div class="bg-white p-10 rounded-[2.5rem] card-shadow border border-slate-50 flex flex-col items-center text-center transition-all group">
-                <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-blue-600 group-hover:text-white transition-all">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4Z"/></svg>
-                </div>
-                <h3 class="text-xl font-bold mb-4 text-slate-900">تقييم الفعالية</h3>
-                <p class="text-slate-500 text-sm mb-8 leading-loose font-light italic">استمارة قياس الرضا والتقييم اللحظي لمستوى الفعالية أثناء التنفيذ.</p>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLScKk93634rGnI9EpDT3pIaDaxfEO9cwWSCfa4ils46ln0JFFQ/viewform" target="_blank" class="mt-auto w-full py-4 px-6 bg-blue-50 text-blue-600 rounded-2xl font-bold hover:bg-blue-600 hover:text-white transition-colors">ابدأ التقييم</a>
-            </div>
+<!-- HERO -->
 
-            <!-- Feedback Card -->
-            <div class="bg-white p-10 rounded-[2.5rem] card-shadow border border-slate-50 flex flex-col items-center text-center transition-all group">
-                <div class="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-emerald-600 group-hover:text-white transition-all">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                </div>
-                <h3 class="text-xl font-bold mb-4 text-slate-900">تغذية راجعة ختامية</h3>
-                <p class="text-slate-500 text-sm mb-8 leading-loose font-light italic">تقييم الأثر المتردد ومقترحات التطوير لتعزيز الخطط المستقبلية.</p>
-                <a href="https://docs.google.com/forms/d/1NJYChd0THMhzvNStX0TeNQQr69kHFsDWTeHoswzrFGI/viewform" target="_blank" class="mt-auto w-full py-4 px-6 bg-emerald-50 text-emerald-600 rounded-2xl font-bold hover:bg-emerald-600 hover:text-white transition-colors">تقديم الرأي</a>
+<div class="hero">
+    <div class="hero-inner">
+        <img src="/mnt/user-data/uploads/IMG_5089.jpeg" alt="شعار التعليم والتدريب المهني" class="hero-logo">
+        <h1 class="hero-title">بوابة إدارة الفعاليات</h1>
+        <p class="hero-subtitle">قسم تطوير وضمان الجودة — الكلية المهنية بصلالة</p>
+        <p class="hero-desc">
+            رؤية القسم: نسعى لتطوير تجربة تعليمية متميزة من خلال رصد الأداء وضمان جودة الفعاليات والورش التدريبية.
+        </p>
+        <a href="#services" class="hero-cta">
+            الخدمات الإلكترونية
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+    </div>
+</div>
+
+<!-- BREADCRUMB -->
+
+<div class="breadcrumb">
+    <div class="breadcrumb-inner">
+        <a href="#">الرئيسية</a>
+        <span>›</span>
+        <a href="#">قسم تطوير وضمان الجودة</a>
+        <span>›</span>
+        <span>بوابة الفعاليات</span>
+    </div>
+</div>
+
+<!-- SERVICES -->
+
+<div class="section-wrap" id="services">
+    <p class="section-title">الخدمات الإلكترونية</p>
+
+```
+<div class="cards-grid">
+
+    <!-- Card 1 -->
+    <div class="card c-gold">
+        <div class="card-header">
+            <div class="card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+            </div>
+            <div>
+                <div class="card-label">01 — تسجيل</div>
+                <div class="card-title">تسجيل الفعالية</div>
             </div>
         </div>
+        <p class="card-desc">نموذج لتسجيل الورش التدريبية المتوقعة بالكلية، يُقدَّم مسبقاً لضمان التنسيق والتخطيط المناسب.</p>
+        <a href="https://docs.google.com/forms/d/1GyH5sBdCzcEbAEI4vdGS5xGizf1-bV69MrbsFI8jVl8/viewform" class="card-btn">فتح الاستمارة</a>
+    </div>
 
-        <!-- Official Support Section -->
-        <div class="mt-20 bg-slate-900 rounded-[3rem] p-12 text-center text-white shadow-2xl overflow-hidden relative">
-            <div class="absolute inset-0 opacity-10 pointer-events-none">
-                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                    <defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="1"/></pattern></defs>
-                    <rect width="100%" height="100%" fill="url(#grid)" />
-                </svg>
+    <!-- Card 2 -->
+    <div class="card c-sky">
+        <div class="card-header">
+            <div class="card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4Z"/></svg>
             </div>
-            <h4 class="text-2xl font-bold mb-6 relative z-10 italic text-white">للتواصل والدعم الفني
-            </h4>
-            <div class="flex flex-col items-center gap-4 relative z-10">
-                <a href="mailto:development.quality.assurance@svc.edu.om" class="text-lg md:text-2xl font-medium tracking-wide text-blue-300 hover:text-white transition-colors break-all underline decoration-1 underline-offset-8">
-                    development.quality.assurance@svc.edu.om
-                </a>
-                <p class="text-slate-500 text-xs mt-4 tracking-widest uppercase font-bold">نعمل من أجلكم — قسم تطوير وضمان الجودة</p>
+            <div>
+                <div class="card-label">02 — تقييم</div>
+                <div class="card-title">تقييم الفعالية</div>
             </div>
         </div>
-    </main>
+        <p class="card-desc">استمارة قياس الرضا والتقييم اللحظي لمستوى الفعالية أثناء التنفيذ لضمان الجودة المستمرة.</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScKk93634rGnI9EpDT3pIaDaxfEO9cwWSCfa4ils46ln0JFFQ/viewform" target="_blank" class="card-btn">ابدأ التقييم</a>
+    </div>
 
-    <!-- Footer -->
-    <footer class="py-12 text-center border-t border-slate-100">
-        <p class="text-slate-400 text-[11px] font-bold uppercase tracking-[0.2em] mb-4 italic">SVC Development Quality Assurance Portal — 2026</p>
-        <p class="text-slate-300 text-[10px] px-6">جميع الحقوق محفوظة للكلية المهنية بصلالة - سلطنة عُمان</p>
-    </footer>
-</body>
-</html>
+    <!-- Card 3 -->
+    <div class="card c-green">
+        <div class="card-header">
+            <div class="card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div>
+                <div class="card-label">03 — تغذية راجعة</div>
+                <div class="card-title">التغذية الراجعة الختامية</div>
+            </div>
+        </div>
+        <p class="card-desc">تقييم الأثر ومقترحات التطوير عقب انتهاء الفعالية لتعزيز خطط التحسين المستقبلية.</p>
+        <a href="https://docs.google.com/forms/d/1NJYChd0THMhzvNStX0TeNQQr69kHFsDWTeHoswzrFGI/viewform" target="_blank" class="card-btn">تقديم الرأي</a>
+    </div>
+
+</div>
+```
+
+</div>
+
+<!-- CONTACT STRIP -->
+
+<div class="contact-strip">
+    <h3>للتواصل والدعم الفني</h3>
+    <p>قسم تطوير وضمان الجودة — الكلية المهنية بصلالة</p>
+    <a href="/cdn-cgi/l/email-protection#0b6f6e7d6e67647b666e657f257a7e6a67627f72256a78787e796a65686e4b787d68256e6f7e256466">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <span class="__cf_email__" data-cfemail="d3b7b6a5b6bfbca3beb6bda7fda2a6b2bfbaa7aafdb2a0a0a6a1b2bdb0b693a0a5b0fdb6b7a6fdbcbe">[email&#160;protected]</span>
+    </a
