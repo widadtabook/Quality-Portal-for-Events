@@ -46,59 +46,28 @@
             color: #1A5F8A; font-size: 0.875rem; font-weight: 700;
         }
 
-        /* ===== HERO ===== */
-        .hero {
-            min-height: 100vh;
-            display: flex; align-items: center; justify-content: center;
-            background: var(--white);
-            padding: 5rem 1.5rem 3rem;
-        }
-        .hero-inner { text-align: center; max-width: 560px; }
-        .hero-logo {
-            width: 80px; height: 80px;
-            object-fit: contain; border-radius: 12px;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
-        }
-        .hero-title {
-            font-size: 2rem; font-weight: 800;
-            color: var(--text); margin-bottom: 0.5rem;
-        }
-        .hero-subtitle {
-            font-size: 0.95rem; color: var(--sky);
-            font-weight: 700; margin-bottom: 0.75rem;
-        }
-        .hero-desc {
-            font-size: 0.875rem; color: var(--muted);
-            line-height: 1.85; margin-bottom: 2rem;
-        }
-        .hero-cta {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: var(--gold); color: white;
-            padding: 13px 28px; border-radius: 6px;
-            font-family: inherit; font-size: 0.95rem; font-weight: 700;
-            border: none; cursor: pointer;
-            transition: background 0.2s;
-        }
-        .hero-cta:hover { background: #b87a10; }
-
-        /* ===== BREADCRUMB ===== */
-        .breadcrumb {
+        /* ===== PAGE HEADER ===== */
+        .page-header {
             background: var(--white);
             border-bottom: 1px solid var(--border);
-            padding: 0.6rem 1.5rem;
+            padding: 1.25rem 1.5rem;
             margin-top: 52px;
         }
-        .breadcrumb-inner {
+        .page-header-inner {
             max-width: 1160px; margin: 0 auto;
-            display: flex; align-items: center; gap: 8px;
-            font-size: 0.8rem; color: var(--muted);
+            display: flex; align-items: center; gap: 14px;
         }
-        .breadcrumb-inner a {
-            color: var(--sky); text-decoration: none;
-            font-weight: 600; cursor: pointer;
+        .page-header-inner img {
+            width: 48px; height: 48px;
+            object-fit: contain; border-radius: 8px;
+            flex-shrink: 0;
         }
-        .breadcrumb-inner span { opacity: 0.5; }
+        .page-header-title {
+            font-size: 1.1rem; font-weight: 800; color: var(--text);
+        }
+        .page-header-sub {
+            font-size: 0.8rem; color: var(--sky); font-weight: 600; margin-top: 2px;
+        }
 
         /* ===== SERVICES SECTION ===== */
         .section-wrap {
@@ -224,17 +193,14 @@
         footer p { font-size: 11px; color: rgba(255,255,255,0.5); }
         footer p + p { margin-top: 4px; }
 
-        /* ===== MOBILE ADJUSTMENTS ===== */
         @media (max-width: 640px) {
-            .hero-title { font-size: 1.6rem; }
-            .hero { padding: 4rem 1rem 2.5rem; }
             .section-wrap { padding: 1.5rem 1rem 2rem; }
         }
     </style>
 </head>
 <body>
 
-<!-- TOP BAR — بدون زر English -->
+<!-- TOP BAR -->
 <div class="topbar">
     <div class="topbar-logo">
         <img src="IMG_5628.jpeg" alt="شعار">
@@ -242,35 +208,16 @@
     </div>
 </div>
 
-<!-- HERO PAGE -->
-<div id="page-hero">
-    <div class="hero">
-        <div class="hero-inner">
-            <img src="IMG_5628.jpeg" alt="شعار التعليم والتدريب المهني" class="hero-logo">
-            <h1 class="hero-title">بوابة إدارة الفعاليات</h1>
-            <p class="hero-subtitle">قسم تطوير وضمان الجودة — الكلية المهنية بصلالة</p>
-            <p class="hero-desc">
-                رؤية القسم: الريادة في مجال التعليم والتدريب المهنّي محلياً وإقليمياً
-                بما يحقق الأهداف الوطنية للتنمية المستدامة
-            </p>
-            <button class="hero-cta" onclick="showServices()">
-                الخدمات الإلكترونية
-                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-            </button>
-        </div>
-    </div>
-</div>
+<!-- SERVICES PAGE — ظاهرة مباشرة -->
+<div id="page-services">
 
-<!-- SERVICES PAGE — مخفية في البداية -->
-<div id="page-services" style="display:none">
-
-    <div class="breadcrumb">
-        <div class="breadcrumb-inner">
-            <a onclick="showHero()">الرئيسية</a>
-            <span>›</span>
-            <span>قسم تطوير وضمان الجودة</span>
-            <span>›</span>
-            <span>بوابة الفعاليات</span>
+    <div class="page-header">
+        <div class="page-header-inner">
+            <img src="IMG_5628.jpeg" alt="شعار">
+            <div>
+                <div class="page-header-title">بوابة إدارة الفعاليات</div>
+                <div class="page-header-sub">قسم تطوير وضمان الجودة — الكلية المهنية بصلالة</div>
+            </div>
         </div>
     </div>
 
@@ -356,19 +303,7 @@
 
 </div>
 
-<script>
-    function showServices() {
-        document.getElementById('page-hero').style.display = 'none';
-        document.getElementById('page-services').style.display = 'block';
-        window.scrollTo(0, 0);
-    }
 
-    function showHero() {
-        document.getElementById('page-services').style.display = 'none';
-        document.getElementById('page-hero').style.display = 'block';
-        window.scrollTo(0, 0);
-    }
-</script>
 
 </body>
 </html>
